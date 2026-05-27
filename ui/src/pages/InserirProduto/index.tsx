@@ -11,9 +11,10 @@ export default function InserirProduto() {
         const formData = new FormData(e.target as HTMLFormElement);
         const nome = formData.get('nome') as string;
         const preco = Number(formData.get('preco')) as number;
+        const quantidade = Number(formData.get('quantidade')) as number;
         const descricao = formData.get('descricao') as string;
 
-        axios.post('http://localhost:3000/produto', { nome, preco, descricao })
+        axios.post('http://localhost:3000/produto', { nome, preco, quantidade, descricao })
             .then(() => {
                 navigate('/produtos');
             })
@@ -49,12 +50,24 @@ export default function InserirProduto() {
                     </div>
 
                     <div>
+                        <label className="form-label text-muted small fw-medium">Quantidade</label>
+                        <input
+                            type="number"
+                            className="form-control form-control-lg fs-6"
+                            placeholder="0"
+                            name="quantidade"
+                            step="1"
+                            required
+                        />
+                    </div>
+
+                    <div>
                         <label className="form-label text-muted small fw-medium">Descrição</label>
                         <textarea
                             className="form-control form-control-lg fs-6"
                             placeholder="Dê detalhes sobre o produto..."
                             name="descricao"
-                            rows={3}
+                            rows={4}
                             required
                         />
                     </div>
